@@ -37,7 +37,7 @@ when we can describe the relation between two object as `has-a`.
 ### What is an Abstract Class?
 Abstract class represents real life objects/concepts those are too generic to be existant, but they still define important behavior.
 
-For Example, a `Shape`, is a generic concept of an object that has boundaries, dimensions, etc. However, when we create a Shape object we create a circle, or a rectangle, or a triangle, or a cube, or a cylynder, etc. We should not create a plain shape object, becasue the shape is a concept not a real-life object.
+For Example, a `Shape`, is a generic concept of an object that has boundaries, dimensions, etc. However, when we create a `Shape` object we create a circle, or a rectangle, or a triangle, or a cube, or a cylynder, etc. We should not create a plain `Shape` object, becasue the shape is a concept not a real-life object.
 
 Oh, yeah, do you see, the `Animal` is a generic concept too, so, `Animal` too is an abstract class... :slightly_smiling_face:
 
@@ -47,7 +47,7 @@ Note:
 * Can not instantiate an abstract class. -> cause its a concept, not a real-life object.
 
 ### What is an Interface?
-An Interface defines capabilities, not hierarchy -> more about what the object can do, not what it is or what it has.
+An Interface defines capabilities, not hierarchy -> what the object can do, not what it is or what it has.
 For example: 
 * Comparable<T> → makes a class sortable
 * Serializable → marks a class as serializable
@@ -55,8 +55,132 @@ For example:
 
 We add `-able` syllable to any action to represent the capability. 
 
-> An interface is intitrated to an Object to add new capabilities. For example, An `AirPlane` object is `Flyable`, `Pitch-able`, `Roll-able`, `Yaw-able`. 
-> An interface in Java is a blueprint for classes. It defines a contract — a set of method signatures — that any class implementing the interface must follow.
+> An interface is intrigrated to an object to add new capabilities. For example, An `AirPlane` object is `Fly-able`, `Pitch-able`, `Roll-able`, `Yaw-able`. 
+> An interface in Java is a blueprint for classes. It defines a contract — a set of method signatures — the methods without bodies only outline the capability. It is upto the implementing object to define how the capability works.
+
+An example scenario that involves, inheritance,and interface. 
+
+:standing_man: A human is an object with states (eyes, ears, legs, head) and behaviours (breath(), eat(), sleep()).
+
+```java
+public class Human {
+	int eyes;
+	int ears;
+	int legs;
+	int head;
+	
+	public Human() {
+		
+	}
+	public Human(int eyes, int ears, int legs, int head) {
+		this.eyes = eyes;
+		this.ears = ears;
+		this.legs = legs;
+		this.head = head;
+	}
+	
+	public void breathe() {
+		System.out.println("breathing...");
+	}
+	
+	public void eat() {
+		System.out.println("eating...");
+	}
+	
+	public void sleep() {
+		System.out.println("sleeping...");
+	}
+}
+```
+* :climbing_man: A Climber `is-a` Human. It inherits the `breath(), eat(), sleep()` behaviors from the parent object Human.
+
+```java
+public class Climber extends Human{
+    public Climber() {
+		    System.out.println("I'm a climber");
+	  }
+}
+
+```
+
+* :technologist: A Developer `is-a` Human. It inherits the `breath(), eat(), sleep()` behaviors from the parent object Human.
+
+```java
+
+public class Developer extends Human{
+    public Developer() {
+		    System.out.println("I'm a developer");
+	  }
+}
+
+```
+
+```java
+public class TestHuman {
+
+	public void testHuman() {
+		Human dummy = new Human(); // human is an abstract concept.
+		
+		Human climber = new Climber();
+		climber.breathe();
+		
+		Human dev = new Developer();
+		dev.breathe();
+	}
+	
+	public static void main(String a[]) {
+		TestHuman ob = new TestHuman();
+		ob.testHuman();
+	}
+}
+```
+
+A climer needs to climb right!, so lets add the `Climbable` capability to the Climber. :star: Remember, `interface` intigrates capabilities. So we create an interface `Climbable`.
+
+```java
+public interface Climbable {
+	void climb();
+}
+```
+Now the climber implements the `Climbable` capability.
+
+```java 
+public class Climber extends Human implements Climbable{
+	public Climber() {
+		System.out.println("I'm a climber");
+	}
+	
+	@Override
+	public void climb() {
+		System.out.println("Climber can climb...");
+	}
+}
+
+```
+
+Similarly A developer needs to build right!, so lets add the `Buildable` capability to the developer.
+
+```java
+public interface Buildable {
+	void code();
+}
+```
+Now the developer implements the `Buildable` capability.
+
+```java
+public class Developer extends Human implements Buildable{
+
+	public Developer() {
+		System.out.println("I'm a Developer");
+	}
+	
+	@Override
+	public void code() {
+		System.out.println("Dev can code...");
+	}
+}
+```
+
 ----
 
 2. Why Java has Inheritance, Abstract class, Interface?
