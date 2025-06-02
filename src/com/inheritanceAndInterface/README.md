@@ -2,7 +2,7 @@
 
 In this article, we will understand why Java has Abstract Class, Interface, Inheritance. 
 
-Preface: In this article I've tried to address the curious and fluctuating nature of a human brain while reading a new concept. Every topic mentioned here describes, what is it, why it was needed, how we can use, twist, tweak it. Disclaimer: There will be less code, as I believe, syntax many times creates distractions in the progression of learning. No worries, I've included code snippets, also the reference java files are uploaded in the repo.
+Preface: In this article I've tried to address the curious and fluctuating nature of a human brain while reading a new concept. Every topic mentioned here describes, what is it, why it was needed, how we can use, twist, tweak it. The reference java files are uploaded in the repo.
 
 Please, feel free to reach me if you have any corrections, suggestions, comments, liking, disliking... :)  oh yeah, I assume that you know Java syntax, and have read/known/heard about these mentioned topics before.
 
@@ -181,7 +181,43 @@ public class Developer extends Human implements Buildable{
 }
 ```
 
+:point_right: Look, now to test the Climber, and developer behavior and capabilities, we need to change the test method.
+
+```java
+public class TestHuman {
+
+	public void testHuman() {
+		Human dummy = new Human(); // human is an abstract concept.
+		
+		Climber climber = new Climber(); // Climber is no longer only a human, 
+		climber.breathe();		 // he is a climber now
+		climber.climb();
+		
+		System.out.println("-----------");
+		Developer dev = new Developer(); // developer is no longer only a human, 
+		dev.breathe();			 // he is a developer now
+		dev.code();
+	}
+	
+	public static void main(String a[]) {
+		TestHuman ob = new TestHuman();
+		ob.testHuman();
+	}
+}
+
+```
+:thinking: Now, we want to add a moving capability to the Human, cause you know, every human should be able to move. So we are creating and interface `Movable`
+
+```java
+public interface Movable {
+	void move();
+}
+```
+
+
 ----
+
+
 
 2. Why Java has Inheritance, Abstract class, Interface?
 3. we already have abstract class then why we need interface?
