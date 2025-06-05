@@ -181,7 +181,7 @@ public class Developer extends Human implements Buildable{
 }
 ```
 
-:point_right: Look, now to test the Climber, and developer behavior and capabilities, we need to change the test method.
+:point_right: Look, to test the Climber, and developer behavior and capabilities, we need to change the test method.
 
 ```java
 public class TestHuman {
@@ -214,6 +214,39 @@ public interface Movable {
 }
 ```
 
+:point_right: Climber is no longer only a human, he is a climber likewise the developer. Meaning we can not refer the climber and developer objects refered as Human anymore when we call the `climber.climb()` or `dev.code()`. Because the Human object does not know anything about `Climbable` or `Buildable`.
+
+To solve this, we can cast, `((Climbable) climber).climb()` and `((Buildable) dev).code()`
+
+⭐ The compiler allows it because `Human` might actually be a `Climbable` at runtime (via subclass)
+
+⭐ During runtime Java uses the actual object type, which is Climber and it checks “Does Climber implement Climbable?” Yes -> Cast succeeds.
+
+
+```java
+public class TestHuman {
+
+	public void testHuman() {
+		Human dummy = new Human(); // human is an abstract concept.
+		
+		Human climber = new Climber(); // Climber is no longer only a human, 
+		climber.breathe();				 // he is a climber now
+		((Climbable) climber).climb();
+		climber.sleep();
+		
+		System.out.println("-----------");
+		Human dev = new Developer(); // developer is no longer only a human, 
+		dev.breathe();					 // he is a developer now
+		((Buildable) dev).code();
+		dev.sleep();
+	}
+	
+	public static void main(String a[]) {
+		TestHuman ob = new TestHuman();
+		ob.testHuman();
+	}
+}
+```
 
 ----
 
